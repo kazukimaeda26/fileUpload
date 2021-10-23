@@ -33,7 +33,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     }
 
     @Override
-    public void uploadToDb(MultipartFile file) {
+    public UploadedFile uploadToDb(MultipartFile file) {
 
         UploadedFile uploadedFile = new UploadedFile();
         try {
@@ -41,9 +41,11 @@ public class FileUploadServiceImpl implements FileUploadService {
             // おそらくここで、ファイルタイプのチェックが可能。
             uploadedFile.setFileType(file.getContentType());
             uploadedFile.setFileName(file.getOriginalFilename());
-            fileUploadRepository.save(uploadedFile);
+            UploadedFile uploadedFileToRet = fileUploadRepository.save(uploadedFile);
+            return uploadedFileToRet;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

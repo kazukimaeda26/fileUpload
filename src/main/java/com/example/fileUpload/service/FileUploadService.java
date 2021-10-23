@@ -6,6 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileUploadService {
 
     public void uploadToLocal(MultipartFile file);
-    public void uploadToDb(MultipartFile file);
+    public UploadedFile uploadToDb(MultipartFile file);
     public UploadedFile downloadFile(String fileId);
 }
